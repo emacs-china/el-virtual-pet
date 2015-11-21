@@ -130,8 +130,10 @@
     (setf (virtual-pet-happiness pet) (min 20 (+ happiness change)))))
 
 (defun vp--incf-pet-health (pet change)
-  (let ((health (virtual-pet-health pet)))
-    (setf (virtual-pet-health pet) (min 20 (+ health change)))))
+  (let* ((health (virtual-pet-health pet))
+         (new-health (min 20 (+ health change)))
+         (new-health (max 0 new-health)))
+    (setf (virtual-pet-health pet) new-health)))
 
 
 (defun vp--change-status (pet status-change-rule-alist)
