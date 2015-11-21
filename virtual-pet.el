@@ -122,12 +122,16 @@
   "")
 
 (defun vp--incf-pet-hunger (pet change)
-  (let ((hunger (virtual-pet-hunger pet)))
-    (setf (virtual-pet-hunger pet) (min 20 (+ hunger change)))))
+  (let* ((hunger (virtual-pet-hunger pet))
+         (new-hunger (min 20 (+ hunger change)))
+         (new-hunger (max 0 new-hunger)))
+    (setf (virtual-pet-hunger pet) new-hunger )))
 
 (defun vp--incf-pet-happiness (pet change)
-  (let ((happiness (virtual-pet-happiness pet)))
-    (setf (virtual-pet-happiness pet) (min 20 (+ happiness change)))))
+  (let ((happiness (virtual-pet-happiness pet))
+        (new-happiness (min 20 (+ happiness change)))
+        (new-happiness (max 0 new-happiness)))
+    (setf (virtual-pet-happiness pet) new-happiness)))
 
 (defun vp--incf-pet-health (pet change)
   (let* ((health (virtual-pet-health pet))
