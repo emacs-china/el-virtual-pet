@@ -179,3 +179,5 @@
   (interactive)
   (when (timerp vp-timer)
     (cancel-timer vp-timer)))
+
+(provide 'virtual-pet)
