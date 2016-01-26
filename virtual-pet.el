@@ -212,7 +212,7 @@
   (vp--time-passed-by)
   (vp--reset-pet-status vp-the-pet vp--current-time-cycle)
   (when (vp--pet-dead-p vp-the-pet)
-    (message "sorry, %s is dead" (virtual-pet-name vp-the-pet))
+    (message "sorry, %s is dead %s" (virtual-pet-name vp-the-pet) (if (> (virtual-pet-happiness vp-the-pet) (* 0.5 vp-max-happiness)) "peaceful" "painful"))
     (vp-stop-game)))
 
 (defvar vp-timer nil)
