@@ -213,13 +213,23 @@
   (vp--reset-pet-status vp-the-pet vp--current-time-cycle)
   (when (vp--pet-dead-p vp-the-pet)
     (message "sorry, %s is dead %s" (virtual-pet-name vp-the-pet) (if (> (virtual-pet-happiness vp-the-pet) (* 0.5 vp-max-happiness)) "peaceful" "painful"))
-    (vp-stop-game)))
+    (vp-stop-game)
+    (vp--change-pet-status vp-the-pet 'dead)))
 
 (defvar vp-timer nil)
 
 ;;;###autoload
+(defun vp-pet-relive (pet)
+  (interactive)
+  (setf (virtual-pet-happiness pet) vp-max-happiness)
+  (setf (virtual-pet-health pet) vp-max-heath)
+  (setf (virtual-pet-hunger pet) 0)
+  (setf (virtual-pet-status pet) 'stop))
+
+;;;###autoload
 (defun vp-start-game ()
   (interactive)
+  (vp-pet-relive vp-the-pet)
   (vp-redraw-gui)
   (when (timerp vp-timer)
     (cancel-timer vp-timer))
