@@ -86,16 +86,20 @@
   "virtual pet customize group")
 
 (defcustom vp-buffer "*virtual-pet*"
-  "name of virtual pet buffer")
+  "name of virtual pet buffer"
+  :group 'virtual-pet)
 
 (defcustom vp-max-hunger 20
-  "max health point")
+  "max health point"
+  :group 'virtual-pet)
 
 (defcustom vp-max-happiness 20
-  "max health point")
+  "max health point"
+  :group 'virtual-pet)
 
 (defcustom vp-max-heath 20
-  "max health point")
+  "max health point"
+  :group 'virtual-pet)
 
 (defstruct virtual-pet
   (name (read-string "please input the pet's name:"))
@@ -113,11 +117,14 @@
 (defvar vp--current-time-cycle 0)
 
 (defcustom vp-seconds-per-time-cycle 5
-  "")
+  ""
+  :group 'virtual-pet)
 (defcustom vp-time-cycle-per-day 60
-  "")
+  ""
+  :group 'virtual-pet)
 (defcustom vp-time-cycle-to-sleep 48
-  "")
+  ""
+  :group 'virtual-pet)
 (defcustom vp-status-change-rule-alist '((stop (1 . 1)  ;醒着时,饥饿度每个滴答+1
                                                (2 . -1) ;快乐度每2个滴答-1
                                                )
@@ -136,7 +143,8 @@
                                                (2 . -1) ;快乐度每2个滴答-1
                                                (1 . 1)  ;健康度每个滴答+1
                                                ))
-  "")
+  ""
+  :group 'virtual-pet)
 
 (defun vp--incf-pet-hunger (pet change)
   (let* ((hunger (virtual-pet-hunger pet))
@@ -208,6 +216,8 @@
     (vp-stop-game)))
 
 (defvar vp-timer nil)
+
+;;;###autoload
 (defun vp-start-game ()
   (interactive)
   (vp-redraw-gui)
@@ -215,6 +225,7 @@
     (cancel-timer vp-timer))
   (setq vp-timer (run-with-timer 0 vp-seconds-per-time-cycle #'vp-change-status)))
 
+;;;###autoload
 (defun vp-stop-game ()
   (interactive)
   (when (timerp vp-timer)
