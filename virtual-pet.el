@@ -1,4 +1,5 @@
-;; GUI API
+;; -*- lexical-binding: t; -*-
+;; GUI API  
 (defun vp--insert-image-button (label &optional img &rest properties)
   "insert a button that displayed as the `IMG'"
   (let ((btn (apply #'insert-text-button label properties)))
@@ -8,7 +9,10 @@
 
 (defun vp--insert-image-function-button (label img fn)
   "insert a image button which when clicked will triggle `FN'"
-  (vp--insert-image-button label img 'follow-link t 'action fn))
+  (vp--insert-image-button label img
+                           'follow-link t
+                           'action fn
+                           'help-echo label))
 
 (defun vp--insert-image (label &optional img width height)
   "insert a `IMG' with specified width and height"
